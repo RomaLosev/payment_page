@@ -1,5 +1,5 @@
 """
-ASGI config for paymet_page project.
+ASGI config for nothing project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'paymet_page.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'nothing.settings')
 
 application = get_asgi_application()
