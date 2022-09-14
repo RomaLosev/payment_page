@@ -21,7 +21,6 @@ jobs:
 
       - name: Test with flake8 and django tests
         run: |
-          # запуск проверки проекта по flake8
           python -m flake8
 
   build_and_push_to_docker_hub:
@@ -58,11 +57,10 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/payment_page:latest
-            sudo docker-compose stop
-            sudo docker-compose rm web
+            sudo docker stop
             touch .env
             echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
             echo DEBUG=${{ secrets.DEBUG }} >> .env
             echo STRIPE_PUBLIC_KEY=${{ secrets.STRIPE_PUBLIC_KEY }} >> .env
             echo STRIPE_SECRET_KEY=${{ secrets.STRIPE_SECRET_KEY }} >> .env
-            sudo docker-compose up -d --build
+            sudo docker run --rm -d -p 8000:8000
