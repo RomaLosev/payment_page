@@ -1,5 +1,8 @@
+![example workflow](https://github.com/RomaLosev/payment_page/actions/workflows/main.yml/badge.svg)
+
 # Описание проекта
 Тестовое задание для ООО Ришат
+Интеграция Django с сервисом приёма платежей stripe.com
 
 # Установка проекта локально
 Склонировать репозиторий и перейти в папку с проектом:
