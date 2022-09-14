@@ -11,25 +11,36 @@ class Item(models.Model):
         help_text='Описание товара',
         verbose_name='Описание товара',
     )
-    price = models.PositiveSmallIntegerField(
-        help_text='Цена товара',
-        verbose_name='Цена товара',
+    price = models.PositiveIntegerField(
+        help_text='Цена товара в центах',
+        default=0,
     )
 
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
 
+    def get_price(self):
+        return "{0:.2f}".format(self.price / 100)
+
     def __str__(self):
         return self.name
 
 
-class Order(models.Model):
-    items = models.ManyToManyField(
+class StripePrice(models.Model):
+    item = models.ForeignKey(
         Item,
-        related_name='Товары',
+        on_delete=models.CASCADE,
+
     )
-    total_price = models.PositiveSmallIntegerField(
-        help_text='Общая цена товаров в заказе',
-        verbose_name='Цена товаров',
+    stripe_price_id = models.CharField(
+        max_length=100,
+        help_text='Цена товара в stripe',
     )
+
+    class Meta:
+        verbose_name = 'Цена'
+        verbose_name_plural = 'Цены'
+
+    def __str__(self):
+        return self.stripe_price_id

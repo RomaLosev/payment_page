@@ -1,18 +1,14 @@
 from django.contrib import admin
-from .models import Item, Order
+from .models import Item, StripePrice
 
 
-@admin.register(Item)
+class PriceInlineAdmin(admin.TabularInline):
+    model = StripePrice
+    extra = 0
+
+
 class ItemAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'price',
-    )
-    search_fields = ('name',)
+    inlines = [PriceInlineAdmin]
 
 
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = (
-        'total_price',
-    )
+admin.site.register(Item, ItemAdmin)

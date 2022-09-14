@@ -1,23 +1,55 @@
 import stripe
-from django import views
-from django.http import JsonResponse
-from django.conf import settings
 
+from django import views
+from django.conf import settings
+from django.http import JsonResponse
+from django.views.generic import TemplateView
+
+
+from items.models import Item, StripePrice
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
+class ItemsMainPage(TemplateView):
+    template_name = 'main.html'
+
+    def get_context_data(self, **kwargs):
+        items = Item.objects.all()
+        context = {
+            'items': items,
+        }
+        return context
+
+
+class ItemPage(TemplateView):
+    template_name = 'item.html'
+
+    def get_context_data(self, **kwargs):
+        item_id = self.kwargs['pk']
+        item = Item.objects.get(id=item_id)
+        price = StripePrice.objects.filter(item=item)
+        context = {
+            'item': item,
+            'price': price,
+            'STRIPE_PUBLIC_KEY': settings.STRIPE_PUBLIC_KEY,
+        }
+        return context
+
+
 class CreateCheckoutSessionView(views.View):
 
-    def create_checkout_session(self, request, *args, **kwargs):
+    def get(self, *args, **kwargs):
+        item_id = self.kwargs['pk']
+        item = Item.objects.get(id=item_id)
         session = stripe.checkout.Session.create(
           line_items=[{
             'price_data': {
               'currency': 'usd',
               'product_data': {
-                'name': 'T-shirt',
+                'name': item.name,
               },
-              'unit_amount': 2000,
+              'unit_amount': item.price,
             },
             'quantity': 1,
           }],

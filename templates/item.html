@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Купи Чехол</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body align="center">
+<div class="cover-container d-flex w-50 h-100 p-3 mx-auto flex-column" align="center">
+    <div class="modal modal-alert position-static d-block py-5">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <h1>{{ item.name }}</h1>
+            <p>{{ item.description }}</p>
+            <h2>$ {{ item.get_price }}</h2>
+            <button class="w-100 btn btn-lg btn-primary align-center" id="buy-button">Купить</button>
+            <script type="text/javascript">
+      var stripe = Stripe('pk_test_51LhaRpFuqzy45UOlwND2nZK5YspY2DO2u1h2Zj3HpXb5IgkArPSVQwbgHA7petOhXB0oVTFNlJXJNpTtL5NmtRWB00xjBIfxhe');
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+        // Create a new Checkout Session using the server-side endpoint
+        // Redirect to Stripe Session Checkout
+        fetch('/buy/{{item.id}}', {method: 'GET'})
+        .then(response => response.json())
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+            </script>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
