@@ -26,6 +26,7 @@ ALLOWED_HOSTS = [
     '0.0.0.0',
     'LOCALHOST',
     '84.201.165.109',
+    'web:8000',
 ]
 
 # Application definition
