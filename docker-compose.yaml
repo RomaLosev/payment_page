@@ -1,18 +1,26 @@
 version: '3.8'
 services:
   web:
-    build: hulinet/payment_page:latest
+    image: hulinet/payment_page:latest
     restart: always
+    volumes:
+      - static_value:/app/static/
     ports:
-     - "8000:8000"
+      - "8000:8000"
     env_file:
       - ./.env
 
   nginx:
     image: nginx:1.21.3-alpine
-
+    restart: always
     ports:
       - "80:80"
-
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static_value:/var/html/static/
     depends_on:
-      - web
+      - frontend
+
+  volumes:
+    static_value:
