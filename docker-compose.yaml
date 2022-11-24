@@ -8,7 +8,7 @@ services:
     env_file:
       - ./.env
   web:
-    #build: ./
+    # build: ./  for local build
     image: hulinet/payment_page:latest
     restart: always
     volumes:
