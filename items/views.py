@@ -13,7 +13,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 class ItemsMainPage(TemplateView):
     template_name = 'main.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: any) -> dict[str, any]:
         items = Item.objects.all()
         context = {
             'items': items,
@@ -24,7 +24,7 @@ class ItemsMainPage(TemplateView):
 class ItemPage(TemplateView):
     template_name = 'item.html'
 
-    def get_context_data(self, **kwargs):
+    def get_context_data(self, **kwargs: any) -> dict[str, any]:
         item_id = self.kwargs['pk']
         item = get_object_or_404(Item, id=item_id)
         price = StripePrice.objects.filter(item=item)
@@ -39,7 +39,7 @@ class ItemPage(TemplateView):
 
 class CreateCheckoutSessionView(views.View):
 
-    def get(self, *args, **kwargs):
+    def get(self, *args: any, **kwargs: any) -> JsonResponse:
         item_id = self.kwargs['pk']
         item = Item.objects.get(id=item_id)
         session = stripe.checkout.Session.create(

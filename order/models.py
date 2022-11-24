@@ -23,10 +23,10 @@ class Order(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return f'/order/{self.id}'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'Заказ №{self.id}'
 
 
@@ -54,7 +54,7 @@ class ItemInOrder(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.item.name} в заказе {self.order.id}'
 
 
@@ -80,7 +80,7 @@ class Discount(models.Model):
         verbose_name = 'Скидка'
         verbose_name_plural = 'Скидки'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.name}: {self.percentage}%'
 
 
@@ -110,5 +110,5 @@ class Tax(models.Model):
         verbose_name = 'Налог'
         verbose_name_plural = 'Налоги'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.name}: {self.percentage}%'

@@ -36,10 +36,10 @@ class Item(models.Model):
     def get_price(self) -> str:
         return "{0:.2f}".format(self.price / 100)
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return f'/item/{self.id}'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
@@ -57,5 +57,5 @@ class StripePrice(models.Model):
         verbose_name = 'Цена'
         verbose_name_plural = 'Цены'
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.stripe_price_id

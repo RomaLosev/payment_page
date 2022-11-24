@@ -34,7 +34,7 @@ class OrderView(TemplateView):
 class CreateCheckoutSessionOrderView(views.View):
 
     @staticmethod
-    def tax(order):
+    def tax(order: Order) -> list | None:
         if order.tax.count() != 0:
             tax = order.tax.all()[0]
             tax_rates = stripe.TaxRate.create(
@@ -45,7 +45,7 @@ class CreateCheckoutSessionOrderView(views.View):
             return [tax_rates['id']]
 
     @staticmethod
-    def coupon(order):
+    def coupon(order: Order) -> list[dict] | None:
         if order.discount.count() != 0:
             discount = order.discount.all()[0]
             coupon = stripe.Coupon.create(
@@ -55,7 +55,7 @@ class CreateCheckoutSessionOrderView(views.View):
             )
             return [{'coupon': coupon}]
 
-    def get(self, *args, **kwargs):
+    def get(self, *args: any, **kwargs: any) -> JsonResponse:
         order_id = self.kwargs['pk']
         order = get_object_or_404(Order, id=order_id)
         items = ItemInOrder.objects.filter(order_id=order_id)

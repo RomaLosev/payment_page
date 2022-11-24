@@ -16,13 +16,13 @@ class ItemInOrderFormSet(BaseInlineFormSet):
                 pass
             if count < 1:
                 raise ValidationError(
-                    'В заказе должен быть хоть один товар'
+                    'В заказе должен быть один товар'
                 )
 
 
 class ItemInOrderInline(admin.StackedInline):
     model = ItemInOrder
-    extra = 1
+    extra = 0
     formset = ItemInOrderFormSet
     fields = ('item', 'amount')
 
