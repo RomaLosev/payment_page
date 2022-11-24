@@ -14,6 +14,8 @@ class Item(models.Model):
     description = models.TextField(
         help_text='Описание товара',
         verbose_name='Описание товара',
+        null=True,
+        blank=True,
     )
     price = models.PositiveIntegerField(
         help_text='Цена товара в центах',

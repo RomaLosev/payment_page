@@ -1,11 +1,6 @@
 from django.urls import path
 
-from items.views import (
-    CreateCheckoutSessionView,
-    ItemPage,
-    ItemsMainPage,
-
-)
+from items.views import CreateCheckoutSessionView, ItemPage, ItemsMainPage
 
 app_name = 'items'
 

@@ -45,15 +45,16 @@ class CreateCheckoutSessionView(views.View):
         session = stripe.checkout.Session.create(
             line_items=[{
                 'price_data': {
+                    'unit_amount': item.price,
                     'currency': item.currency,
                     'product_data': {
                         'name': item.name,
                     },
-                    'unit_amount': item.price,
                 },
                 'quantity': 1,
             }],
             mode='payment',
+            payment_method_types=['card'],
             success_url='https://example.com/success',
             cancel_url='https://example.com/cancel',
         )

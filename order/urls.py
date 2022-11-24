@@ -1,9 +1,6 @@
 from django.urls import path
 
-from order.views import (
-    CreateCheckoutSessionOrderView,
-    OrderView
-)
+from order.views import CreateCheckoutSessionOrderView, OrderView
 
 app_name = 'order'
 
