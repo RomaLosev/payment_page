@@ -15,7 +15,7 @@
 <div class="cover-container d-flex w-50 h-100 p-3 mx-auto flex-column" align="center">
     <div class="modal modal-alert position-static d-block py-5">
         <div class="card mb-4 rounded-3 shadow-sm">
-            <form action="{% url 'item_page' item.id %}">
+            <form action="{% url 'items:item_page' item.id %}">
                 <h1>
                     {{ item.name }}
                 </h1>
