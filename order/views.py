@@ -35,7 +35,7 @@ class CreateCheckoutSessionOrderView(views.View):
 
     @staticmethod
     def tax(order):
-        if order.tax.count() > 0:
+        if order.tax.count() != 0:
             tax = order.tax.all()[0]
             tax_rates = stripe.TaxRate.create(
                 display_name='Tax',
@@ -43,10 +43,12 @@ class CreateCheckoutSessionOrderView(views.View):
                 percentage=tax.percentage,
             )
             return [tax_rates['id']]
+        else:
+            return None
 
     @staticmethod
     def coupon(order):
-        if order.discount.count() > 0:
+        if order.discount.count() != 0:
             discount = order.discount.all()[0]
             coupon = stripe.Coupon.create(
                 name=discount.name,
@@ -54,6 +56,8 @@ class CreateCheckoutSessionOrderView(views.View):
                 duration='once',
             )
             return [{'coupon': coupon}]
+        else:
+            return None
 
     def get(self, *args, **kwargs):
         order_id = self.kwargs['pk']
