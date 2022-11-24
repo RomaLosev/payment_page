@@ -11,7 +11,7 @@
         <div class="card mb-4 rounded-3 shadow-sm">
             <h1>{{ item.name }}</h1>
             <p>{{ item.description }}</p>
-            <h2>$ {{ item.get_price }}</h2>
+            <h2>$ {{ item.get_price }} {{ item.currency }}</h2>
             <button class="w-100 btn btn-lg btn-primary align-center" id="buy-button">Купить</button>
             <script type="text/javascript">
       var stripe = Stripe('pk_test_51LhaRpFuqzy45UOlwND2nZK5YspY2DO2u1h2Zj3HpXb5IgkArPSVQwbgHA7petOhXB0oVTFNlJXJNpTtL5NmtRWB00xjBIfxhe');

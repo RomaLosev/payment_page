@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "payment-page"
+version = "0.1.0"
+description = ""
+authors = ["romanlosev <losik19-94@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "payment_page"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.1.3"
+psycopg2-binary = "^2.9.5"
+python-dotenv = "^0.21.0"
+stripe = "^5.0.0"
+isort = "^5.10.1"
+flake8 = "^5.0.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

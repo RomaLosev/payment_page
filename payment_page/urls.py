@@ -1,9 +1,12 @@
 from django.contrib import admin
 from django.urls import path
+
 from items.views import (
     CreateCheckoutSessionView,
-    ItemsMainPage,
+    CreateCheckoutSessionOrderView,
     ItemPage,
+    OrderView,
+    ItemsMainPage,
 )
 
 urlpatterns = [
@@ -13,5 +16,7 @@ urlpatterns = [
         name='create-checkout-session'
     ),
     path('item/<pk>/', ItemPage.as_view(), name='item_page'),
+    path('order/<pk>/', OrderView.as_view(), name='order_page'),
+    path('pay_for_order/<pk>/', CreateCheckoutSessionOrderView.as_view(), name='order_pay'),
     path('', ItemsMainPage.as_view(), name='main'),
 ]

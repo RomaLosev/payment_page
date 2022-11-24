@@ -1,0 +1,50 @@
+<html>
+<head>
+    <title>Заказ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body align="center">
+<div class="cover-container d-flex w-50 h-100 p-3 mx-auto flex-column" align="center">
+    <div class="modal modal-alert position-static d-block py-5">
+        <table class="table">
+            <thead>
+            <th scope="col">Название</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Цена</th>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.item.name }}</td>
+                <td>{{ item.amount }}</td>
+                <td>{{ item.item.get_price }}, {{ item.item.currency }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+            <dl align="right"> Заказ № {{ order.id }}</dl>
+
+        </table>
+        <button class="w-100 btn btn-lg btn-primary align-center" id="buy-button">Оплатить {{amount}} USD</button>
+        <script type="text/javascript">
+      var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+      var buyButton = document.getElementById('buy-button');
+      buyButton.addEventListener('click', function() {
+        // Create a new Checkout Session using the server-side endpoint
+        // Redirect to Stripe Session Checkout
+        fetch('/pay_for_order/{{order.id}}', {method: 'GET'})
+        .then(response => response.json())
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+      });
+
+
+
+
+
+
+        </script>
+    </div>
+</div>
+</body>
+</html>
