@@ -43,8 +43,6 @@ class CreateCheckoutSessionOrderView(views.View):
                 percentage=tax.percentage,
             )
             return [tax_rates['id']]
-        else:
-            return
 
     @staticmethod
     def coupon(order):
@@ -56,8 +54,6 @@ class CreateCheckoutSessionOrderView(views.View):
                 duration='once',
             )
             return [{'coupon': coupon}]
-        else:
-            return
 
     def get(self, *args, **kwargs):
         order_id = self.kwargs['pk']
