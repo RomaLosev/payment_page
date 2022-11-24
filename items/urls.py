@@ -1,13 +1,18 @@
 from django.urls import path
 
-from items.views import CreateCheckoutSessionView, ItemPage, ItemsMainPage
+from items.views import CreateCheckoutSessionView, ItemPage
 
 app_name = 'items'
 
 urlpatterns = [
     path(
-        'buy/<pk>/', CreateCheckoutSessionView.as_view(),
-        name='create-checkout-session'
+        'buy/<pk>/',
+        CreateCheckoutSessionView.as_view(),
+        name='create-checkout-session',
     ),
-    path('item/<pk>/', ItemPage.as_view(), name='item_page'),
+    path(
+        'item/<pk>/',
+        ItemPage.as_view(),
+        name='item_page',
+    ),
 ]
