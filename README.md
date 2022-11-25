@@ -81,10 +81,6 @@ python manage.py runserver
 ```sh
 http://127.0.0.1:8000/admin
 ```
-Для работы оплаты необходимо добавить те же товары в личный кабинет stripe
-```sh
-https://dashboard.stripe.com/test/products
-```
 # Запуск проекта в Docker контейнере
 Установить Docker с оф. сайта https://www.docker.com/
 - Параметры запуска описаны в файлах docker-compose.yaml и Dockerfile.
